@@ -1,0 +1,111 @@
+[
+  {
+    "endpointId": "main-floor-office-light",
+    "manufacturerName": "HomeSeer Device",
+    "friendlyName": "Office Light",
+    "description": "Z-Wave Switch Multilevel",
+    "displayCategories": [
+      "SWITCH"
+    ],
+    "cookie": {
+      "ref": "4",
+      "useLastLevel": true
+    },
+    "capabilities": [
+      {
+        "type": "AlexaInterface",
+        "interface": "Alexa",
+        "version": "3"
+      },
+      {
+        "type": "AlexaInterface",
+        "interface": "Alexa.PowerController",
+        "version": "3",
+        "properties": {
+          "supported": [
+            {
+              "name": "powerState"
+            }
+          ],
+          "proactivelyReported": false,
+          "retrievable": true
+        }
+      },
+      {
+        "type": "AlexaInterface",
+        "interface": "Alexa.BrightnessController",
+        "version": "3",
+        "properties": {
+          "supported": [
+            {
+              "name": "brightness"
+            }
+          ],
+          "proactivelyReported": false,
+          "retrievable": true
+        }
+      },
+      {
+        "type": "AlexaInterface",
+        "interface": "Alexa.EndpointHealth",
+        "version": "3",
+        "properties": {
+          "supported": [
+            {
+              "name": "connectivity"
+            }
+          ],
+          "proactivelyReported": false,
+          "retrievable": true
+        }
+      }
+    ]
+  },
+  {
+    "endpointId": "main-floor-entryway-light",
+    "manufacturerName": "HomeSeer Device",
+    "friendlyName": "Entryway Light",
+    "description": "Z-Wave Switch Binary",
+    "displayCategories": [
+      "SWITCH"
+    ],
+    "cookie": {
+      "ref": "6"
+    },
+    "capabilities": [
+      {
+        "type": "AlexaInterface",
+        "interface": "Alexa",
+        "version": "3"
+      },
+      {
+        "type": "AlexaInterface",
+        "interface": "Alexa.PowerController",
+        "version": "3",
+        "properties": {
+          "supported": [
+            {
+              "name": "powerState"
+            }
+          ],
+          "proactivelyReported": false,
+          "retrievable": true
+        }
+      },
+      {
+        "type": "AlexaInterface",
+        "interface": "Alexa.EndpointHealth",
+        "version": "3",
+        "properties": {
+          "supported": [
+            {
+              "name": "connectivity"
+            }
+          ],
+          "proactivelyReported": false,
+          "retrievable": true
+        }
+      }
+    ]
+  }
+]
