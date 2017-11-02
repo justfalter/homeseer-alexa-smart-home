@@ -1,75 +1,43 @@
-Welcome to the AWS CodeStar sample Alexa Skill
+HomeSeer Alexa Smart Home Skill API
 ==============================================
 
-This sample code helps get you started with a simple skill built with the
-Amazon Alexa Skills Kit and deployed by AWS CloudFormation to AWS Lambda.
+Configure Environment Variables
+-------------------------------
 
-What's Here
------------
+Set the following environment variables on your AWS Lambda function:
 
-This sample includes:
+* HOMESEER_HOST: connected.homeseer.com
+* HOMESEER_USERNAME: _Your username used to execute JSON API requests_
+* HOMESEER_PASSWORD: _Your password used to execute JSON API requests_
 
-* README.md - this file
-* buildspec.yml - This YAML file is used by AWS CodeBuild to create an artifact
-  that can be used to deploy to AWS Lambda through CloudFormation.
-* index.js - This file contains the AWS Lambda code used to interact with Alexa.
-* template.yml - This YAML file is used by AWS CloudFormation to update AWS Lambda
-  and manage any additional AWS resources.
+Define Discoverable Devices
+---------------------------
 
-Getting Started
----------------
+endpoints.json already has a couple of sample devices defined for reference. You can use 
+[this](https://developer.amazon.com/docs/device-apis/alexa-discovery.html#discoverresponse)
+as a more thorough reference.
 
-To work on the sample code, you'll need to clone your project's repository to your
-local computer. If you haven't, do that first. You can find instructions in the
-AWS CodeStar user guide.
+_*note: the endpoints.json should define the endpoints[] array as the top-level object_
 
-Before registering your custom Alexa skill in the
-[Amazon Developer Portal](https://developer.amazon.com), you can manually test
-your code in the AWS Lambda console.
+### A few notes about endpoint definitions: 
 
-1. Find the AWS Lambda created by CodeStar for your project by visiting the Project
-   view within your CodeStar project. Click the link for the AWS Lambda resource.
+* endpointId: Can be anything, but should be unique. I name mine location1-location2-devicename
+* friendlyName: The name you want to use when referencing the device to Alexa. Can be the same
+name as defined in HS3 or something different.
+* description and manufacturer: These can be anything. They display in the Alexa app.
+* displayCategories: Should be one of [these](https://developer.amazon.com/docs/device-apis/alexa-discovery.html#display-categories) 
+I believe this only used to display a graphic in the alexa app.
+* cookie: Must define a 'ref' property set to the ref of the device in HS3. cookie can also define
+a 'useLastLevel' boolean if you want the 'turnOn' command for dimmers to set the value to the
+dimmer's last on value.
+* capabilities: Define a capability block for each capability your device supports. For binary
+switches, this would be just PowerController. For dimmers, this would include both PowerController
+and BrightnessController. All devices should define the initial AlexaInterface and EndpointHealth
+* proactivelyReported: Should be set to false for all capability blocks until this skill supports
+async status reports.
 
-2. Select your AWS Lambda from the list on the console.
+##### The only, currently support capabilities are PowerController and BrightnessController. 
 
-3. Click Actions and then Test function.
+Once configured, zip up the project and upload to your Lambda.
 
-4. From the Sample event template list, select one of the sample Alexa requests:
-
-   * Alexa Start Session
-   * Alexa Intent - MyColors
-   * Alexa End Session
-
-5. Choose Submit
-
-6. After the test event is run, the Execution Results section will show the
-   response returned by the AWS Lambda.
-
-7. From this page, if you'd like to test other events, click Actions and Configure test event.
-
-
-What Do I Do Next?
-------------------
-
-Once you've tested your AWS Lambda from the AWS Lambda console, you can start making
-changes to your Alexa skill or register it on the Amazon Developer Portal.
-We suggest heading over to Amazon Developer Portal and setting up your new
-custom Alexa skill. You can follow the directions detailed at
-http://amzn.to/1LzFrj6. Since your AWS Lambda is already set-up for you, you
-can follow along starting at the "Sample Interaction Model for the Color
-Expert Blueprint" section.
-
-After you have your Alexa skill set-up, we suggest making a small change to
-lambda_function.py so you can see how changes pushed to your repository are
-automatically picked up by your project pipeline and deployed to AWS Lambda.
-Once you've seen how that works, start developing your own code, and have fun!
-
-Learn more about Serverless Application Model (SAM) and how it works here:
-https://github.com/awslabs/serverless-application-model/blob/master/HOWTO.md
-
-Learn more about AWS CodeStar by reading the user guide. Ask questions or make
-suggestions on our forum.
-
-User Guide: http://docs.aws.amazon.com/codestar/latest/userguide/welcome.html
-
-Forum: https://forums.aws.amazon.com/forum.jspa?forumID=248
+A test file exists in the test directory that you can run and test locally.
